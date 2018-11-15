@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocks Paper Scissors</title>
+    <style>
+      input {
+        height: 50px;
+        width: 100px;
+        padding 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function random(number) {
+        return Math.floor(Math.random() * number);
+      }
+      function computerPlays() {
+        choices = ["rocks", "paper", "scissors"];
+        computerPick = choices[random(3)];
+        var para = document.createElement("P");
+        var t = document.createTextNode("Computer picked " + computerPick);
+        para.appendChild(t);
+        document.body.appendChild(para);
+        return computerPick;
+      }
+      function gamePlay(playerSelection) {
+        computerSelection = computerPlays();
+        playerSelection = playerSelection.toLowerCase();
+        if (computerSelection == playerSelection) {
+          return "You tie";
+        }
+        priority = {"rocks":1, "scissors":2, "paper":3};
+        playerPriority = priority[playerSelection];
+        choices = ["paper", "rocks", "scissors"];
+        if (computerSelection == choices[playerPriority - 1]) {
+          return "You lose";
+        }
+        return "You win!";
+      }
+      function displayResult(playerSelection) {
+        result = gamePlay(playerSelection);
+        var para = document.createElement("P");
+        var t = document.createTextNode(result);
+        para.appendChild(t);
+        document.body.appendChild(para); 
+      }
+    </script>
+    <input type="button" onclick="displayResult('rocks')" value="Rocks"></input>
+    <input type="button" onclick="displayResult('rocks')" value="Paper"></input>
+    <input type="button" onclick="displayResult('rocks')" value="Scissors"></input>
+  </body>
+</html>
