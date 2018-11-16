@@ -7,9 +7,25 @@
         height: 50px;
         width: 100px;
       }
+      div {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        padding-top: 30px;
+      }
     </style>
   </head>
   <body>
+    <div>
+      <input type="button" onclick="displayResult('rocks')" value="Rocks"></input>
+      <input type="button" onclick="displayResult('rocks')" value="Paper"></input>
+      <input type="button" onclick="displayResult('rocks')" value="Scissors"></input>
+    </div>
+    <div>
+      <p id="player"></p>
+      <p id="computer"></p>
+      <p id="result"></p>
+    </div>
     <script>
       function random(number) {
         return Math.floor(Math.random() * number);
@@ -17,15 +33,9 @@
       function computerPlays() {
         choices = ["rocks", "paper", "scissors"];
         computerPick = choices[random(3)];
-        var para = document.createElement("P");
-        var t = document.createTextNode("Computer picked " + computerPick);
-        para.appendChild(t);
-        document.body.appendChild(para);
         return computerPick;
       }
-      function gamePlay(playerSelection) {
-        computerSelection = computerPlays();
-        playerSelection = playerSelection.toLowerCase();
+      function gamePlay(playerSelection, computerSelection) {
         if (computerSelection == playerSelection) {
           return "You tie";
         }
@@ -38,15 +48,11 @@
         return "You win!";
       }
       function displayResult(playerSelection) {
-        result = gamePlay(playerSelection);
-        var para = document.createElement("P");
-        var t = document.createTextNode(result);
-        para.appendChild(t);
-        document.body.appendChild(para); 
+        var computerSelection = computerPlays();
+        document.getElementById("player").textContent = "You selected " + playerSelection;
+        document.getElementById("computer").textContent = "Computer selected " + computerSelection;
+        document.getElementById("result").textContent = gamePlay(playerSelection,computerSelection); 
       }
     </script>
-    <input type="button" onclick="displayResult('rocks')" value="Rocks"></input>
-    <input type="button" onclick="displayResult('rocks')" value="Paper"></input>
-    <input type="button" onclick="displayResult('rocks')" value="Scissors"></input>
   </body>
 </html>
