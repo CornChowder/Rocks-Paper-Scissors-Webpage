@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocks Paper Scissors</title>
+    <style>
+      input {
+        height: 50px;
+        width: 100px;
+        padding 200px;
+      }
+      div {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="button" onclick="displayResult('rocks')" value="Rocks" id = "rocks"></input>
+      <input type="button" onclick="displayResult('paper')" value="Paper" id="paper"></input>
+      <input type="button" onclick="displayResult('scissors')" value="Scissors" id="scissors"></input>
+    </div>
+    <script>
+      function random(number) {
+        return Math.floor(Math.random() * number);
+      }
+      function computerPlays() {
+        choices = ["rocks", "paper", "scissors"];
+        computerPick = choices[random(3)];
+        return computerPick;
+      }
+      function gamePlay(playerSelection,computerSelection) {
+        playerSelection = playerSelection.toLowerCase();
+        if (computerSelection == playerSelection) {
+          return "You tie";
+        }
+        priority = {"rocks":1, "scissors":2, "paper":3};
+        playerPriority = priority[playerSelection];
+        choices = ["paper", "rocks", "scissors"];
+        if (computerSelection == choices[playerPriority - 1]) {
+          return "You lose";
+        }
+        return "You win!";
+      }
+      function displayResult(playerSelection) {
+        var para = document.createElement("P");
+        var t = "You picked " + playerSelection;
+        //para.appendChild(t);
+        //computerSelection = computerPlays();
+        t += "Computer picks " + computerSelection + "\n";
+        //para.appendChild(t);
+        result = gamePlay(playerSelection,computerSelection);
+        // var para = document.createElement("P");
+        t += result;
+        //t = document.createTextNode(t);
+        para.textContent = t;
+        document.body.appendChild(para);
+        initializePage();
+      }
+      function initializePage() {
+        computerSelection = computerPlays();
+        if (computerSelection == "rocks") {
+          document.getElementById("scissors").removeAttribute("style")
+          document.getElementById("rocks").removeAttribute("style")
+          document.getElementById("paper").setAttribute("style","background-color:red");
+        }
+        else if (computerSelection == "paper") {
+          document.getElementById("paper").removeAttribute("style")
+          document.getElementById("rocks").removeAttribute("style")
+          document.getElementById("scissors").setAttribute("style","background-color:red");
+        }
+        else {
+          document.getElementById("paper").removeAttribute("style")
+          document.getElementById("scissors").removeAttribute("style")
+          document.getElementById("rocks").setAttribute("style","background-color:red");
+        }
+        return computerSelection;
+      }
+      var computerSelection;
+      initializePage();
+      
+    </script>
+
+
+  </body>
+</html>
+
+
