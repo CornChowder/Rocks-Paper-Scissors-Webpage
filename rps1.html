@@ -7,11 +7,16 @@
         height: 50px;
         width: 100px;
         padding 200px;
+        margin-top: 50px;
       }
       div {
         margin: auto;
         width: 50%;
         text-align: center;
+        margin-top: 50px;
+      }
+      p {
+        height: 10px;
       }
     </style>
   </head>
@@ -20,6 +25,11 @@
       <input type="button" onclick="displayResult('rocks')" value="Rocks" id = "rocks"></input>
       <input type="button" onclick="displayResult('paper')" value="Paper" id="paper"></input>
       <input type="button" onclick="displayResult('scissors')" value="Scissors" id="scissors"></input>
+    </div>
+    <div>
+      <p id="player"></p>
+      <p id="computer"></p>
+      <p id="result"></p>
     </div>
     <script>
       function random(number) {
@@ -44,18 +54,9 @@
         return "You win!";
       }
       function displayResult(playerSelection) {
-        var para = document.createElement("P");
-        var t = "You picked " + playerSelection;
-        //para.appendChild(t);
-        //computerSelection = computerPlays();
-        t += "Computer picks " + computerSelection + "\n";
-        //para.appendChild(t);
-        result = gamePlay(playerSelection,computerSelection);
-        // var para = document.createElement("P");
-        t += result;
-        //t = document.createTextNode(t);
-        para.textContent = t;
-        document.body.appendChild(para);
+        document.getElementById("player").textContent = "You selected " + playerSelection;
+        document.getElementById("computer").textContent = "Computer selected " + computerSelection;
+        document.getElementById("result").textContent = gamePlay(playerSelection);
         initializePage();
       }
       function initializePage() {
@@ -85,5 +86,3 @@
 
   </body>
 </html>
-
-
